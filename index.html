@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090305">
+<title>أبو الأكبر | مطور</title>
+<style>
+:root{--red:#a5122b;--deep:#090305;--muted:#b7a9ad;--gold:#c7a46a}
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Segoe UI",Tahoma,Arial,sans-serif}
+html,body{min-height:100%;background:#050204;color:#eee;overflow-x:hidden}
+body{background:radial-gradient(circle at 50% 12%,#3a0b18 0,#16060d 35%,#050204 75%);isolation:isolate}
+body:before{content:"";position:fixed;inset:0;z-index:-3;background:linear-gradient(115deg,transparent 20%,rgba(155,16,43,.08),transparent 65%);animation:pulse 9s ease-in-out infinite}
+body:after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at center,transparent 35%,rgba(0,0,0,.78) 100%)}
+@keyframes pulse{50%{opacity:.45;transform:scale(1.08)}}
+.top{position:relative;padding:18px 12px 0;text-align:center;overflow:hidden}
+.top small{display:block;color:#d5bfc5;font-size:11px;letter-spacing:4px;margin-bottom:8px}
+.sword{width:min(95vw,760px);height:auto;filter:drop-shadow(0 0 12px #b31235) drop-shadow(0 0 35px rgba(128,0,30,.7));animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-5px)}}
+.swordText{font-family:serif;font-size:18px;fill:#2b080d;font-weight:900}
+.stage{width:min(100% - 28px,440px);margin:12px auto 110px;position:relative;z-index:4}
+.card{position:relative;padding:34px 23px 25px;border:1px solid rgba(198,120,140,.3);border-radius:30px;background:linear-gradient(145deg,rgba(31,9,17,.88),rgba(7,3,6,.91));backdrop-filter:blur(22px);box-shadow:0 25px 80px #000,0 0 50px rgba(130,0,35,.23),inset 0 0 40px rgba(190,20,55,.05);text-align:center;overflow:hidden}
+.card:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(255,255,255,.045),transparent);transform:translateX(-100%);animation:sheen 8s infinite}
+@keyframes sheen{55%,100%{transform:translateX(100%)}}
+.ornament{color:var(--gold);font-size:22px;letter-spacing:8px;margin-bottom:18px;opacity:.8}
+.avatar{width:108px;height:108px;margin:auto;border-radius:50%;display:grid;place-items:center;font-size:52px;font-weight:900;color:#f4d9df;background:radial-gradient(circle at 35% 25%,#64172b,#1b050d 65%);border:1px solid #b24a64;box-shadow:0 0 0 7px rgba(157,25,54,.08),0 0 45px rgba(177,19,55,.4);position:relative}
+.avatar:after{content:"";position:absolute;inset:-9px;border:1px dashed rgba(199,164,106,.55);border-radius:50%;animation:spin 24s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+h1{font-size:30px;margin:20px 0 5px;color:#fff;text-shadow:0 0 22px rgba(211,29,70,.55)}
+.subtitle{color:#c8b7bd;font-size:13px;letter-spacing:1px;margin-bottom:25px}
+.quote{font-family:serif;color:#d9b9c2;font-size:17px;line-height:2;margin:0 0 24px}
+.info{display:flex;align-items:center;gap:12px;text-align:right;padding:13px 14px;margin:10px 0;border-radius:15px;background:rgba(0,0,0,.35);border-right:3px solid #9f1737;box-shadow:inset 0 0 18px rgba(160,15,45,.06)}
+.icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:rgba(160,15,45,.18);color:#e4a8b8;font-size:17px;flex:none}.info small{display:block;color:#927e86;font-size:11px;margin-bottom:3px}.info strong{font-size:14px;color:#eee;word-break:break-word}
+.btn{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;border:0;border-radius:50px;padding:15px;margin-top:13px;font-size:15px;font-weight:800;text-decoration:none;cursor:pointer;color:white;transition:.25s;position:relative;overflow:hidden}.btn:active{transform:scale(.97)}.telegram{background:linear-gradient(135deg,#8e1230,#d12c50);box-shadow:0 10px 28px rgba(164,18,52,.3)}.copy{background:linear-gradient(135deg,#24202a,#100d13);border:1px solid #49333d}.btn:hover{filter:brightness(1.15)}
+.bottom{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:8px;padding:7px 9px;border:1px solid rgba(190,80,105,.3);border-radius:50px;background:rgba(8,3,7,.88);backdrop-filter:blur(18px);box-shadow:0 8px 35px #000;max-width:calc(100% - 20px)}
+.control{border:1px solid rgba(255,255,255,.12);background:#21121a;color:#f4dce3;border-radius:50px;padding:10px 13px;cursor:pointer;font-size:12px}.control.active{background:#991a3c;border-color:#db5377}.play{width:44px;height:44px;padding:0;font-size:19px}.volume{width:75px;accent-color:#b51b43}
+.layer{position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden}.drop{position:absolute;top:-70px;width:var(--w);height:var(--h);border-radius:50% 50% 45% 45%;background:linear-gradient(150deg,#ef5576 0,#9c1235 45%,#430513 100%);box-shadow:0 0 12px rgba(220,20,65,.65);opacity:var(--o);animation:fall var(--d) linear var(--delay) infinite}@keyframes fall{0%{transform:translate3d(0,-10vh,0) rotate(0);opacity:0}8%{opacity:var(--o)}50%{transform:translate3d(var(--x),50vh,0) rotate(150deg)}100%{transform:translate3d(var(--x2),115vh,0) rotate(330deg);opacity:0}}
+.splash{position:absolute;width:5px;height:5px;border-radius:50%;background:#d72b50;box-shadow:0 0 9px #e22a50;animation:sp .7s ease-out forwards}@keyframes sp{to{transform:translate(var(--sx),var(--sy)) scale(0);opacity:0}}
+.toast{position:fixed;top:18px;left:50%;transform:translateX(-50%) translateY(-80px);background:#240914;color:#f8dfe6;border:1px solid #8d2947;border-radius:12px;padding:12px 18px;z-index:50;transition:.3s;font-size:13px}.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:420px){.stage{width:calc(100% - 20px)}.card{padding:28px 16px 22px}h1{font-size:27px}.swordText{font-size:17px}.bottom{gap:5px}.control{padding:9px 10px}.volume{width:55px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top">
+<small>بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ</small>
+<svg class="sword" viewBox="0 0 760 150" role="img" aria-label="سيف ذو الفقار مع عبارة لا فتى إلا علي لا سيف إلا ذو الفقار">
+<defs><linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".35" stop-color="#aeb7c2"/><stop offset=".52" stop-color="#fff"/><stop offset="1" stop-color="#4b5563"/></linearGradient><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5d58a"/><stop offset=".5" stop-color="#9c6d2e"/><stop offset="1" stop-color="#f3cc72"/></linearGradient></defs>
+<g transform="translate(20 22)"><rect x="18" y="52" width="115" height="24" rx="7" fill="#310812" stroke="#bd6b80" stroke-width="2"/><path d="M35 52v24m22-24v24m22-24v24m22-24v24" stroke="#c7a46a" stroke-width="3"/><rect x="128" y="28" width="18" height="72" rx="5" fill="url(#gold)"/><circle cx="137" cy="64" r="6" fill="#851631" stroke="#f6d995"/><path d="M146 39l25-8v66l-25-8z" fill="url(#gold)" stroke="#805322" stroke-width="2"/><path d="M170 31 Q355 20 560 39 L690 64 L560 89 Q355 108 170 97Z" fill="url(#metal)" stroke="#65717f" stroke-width="2"/><path d="M174 64H680" stroke="#64748b" stroke-width="2"/><path d="M205 35l-4 58m52-61l-4 64m52-66l-4 68m52-70l-4 72m52-70l-4 68m52-64l-4 60m52-56l-4 52m52-48l-4 44" stroke="#64748b" stroke-width="1.5" opacity=".65"/><path d="M690 40l42 24-42 24-25-24z" fill="url(#metal)" stroke="#65717f" stroke-width="2"/><text x="420" y="70" text-anchor="middle" class="swordText">لا فتى إلا علي • لا سيف إلا ذو الفقار</text><path d="M175 42Q410 30 650 52" stroke="#fff" stroke-width="2" opacity=".7" fill="none"/></g></svg>
+</div>
+<div class="layer" id="drops"></div><div class="layer" id="splashes"></div>
+<main class="stage"><section class="card">
+<div class="ornament">✦ ۞ ✦</div><div class="avatar">أ</div>
+<h1>أبو الأكبر</h1><p class="subtitle">مطور تطبيقات ومواقع ويب</p>
+<p class="quote">وَالسَّلَامُ عَلَى الْحُسَيْنِ<br>وَعَلَى عَلِيِّ بْنِ الْحُسَيْنِ<br>وَعَلَى أَوْلَادِ الْحُسَيْنِ</p>
+<div class="info"><span class="icon">👤</span><div><small>الاسم</small><strong>أبو الأكبر</strong></div></div>
+<div class="info"><span class="icon">💻</span><div><small>التخصص</small><strong>تطوير التطبيقات (Android & Web)</strong></div></div>
+<div class="info"><span class="icon">✈️</span><div><small>حساب التيليجرام</small><strong>@hashem2008issa</strong></div></div>
+<a class="btn telegram" href="https://t.me/hashem2008issa" target="_blank" rel="noopener">📱 تواصل معي على تيليجرام</a>
+<button class="btn copy" id="copyBtn">📋 نسخ اسم المستخدم</button>
+</section></main>
+<div class="bottom"><button class="control active" id="rainBtn">🩸 مطر</button><button class="control" id="dropsBtn">💧 قطرات</button><button class="control play" id="musicBtn" aria-label="تشغيل اللطمية">▶</button><input class="volume" id="volume" type="range" min="0" max="100" value="55" aria-label="مستوى الصوت"></div>
+<div class="toast" id="toast" role="status"></div>
+<audio id="audio" src="hashem.mp3" preload="metadata"></audio>
+<script>
+const $=id=>document.getElementById(id),dropLayer=$('drops'),splashLayer=$('splashes');
+let mode='rain',audio=$('audio');
+function makeDrops(){for(let i=0;i<95;i++){let d=document.createElement('i');d.className='drop';let depth=Math.random();d.style.left=Math.random()*100+'%';d.style.setProperty('--w',1.5+depth*4+'px');d.style.setProperty('--h',15+depth*45+'px');d.style.setProperty('--o',.25+depth*.7);d.style.setProperty('--d',1.3+Math.random()*2.8+'s');d.style.setProperty('--delay',-Math.random()*5+'s');d.style.setProperty('--x',(Math.random()*70-35)+'px');d.style.setProperty('--x2',(Math.random()*130-65)+'px');dropLayer.appendChild(d)}}
+function splash(x,y,n=5){for(let i=0;i<n;i++){let s=document.createElement('i');s.className='splash';s.style.left=x+'px';s.style.top=y+'px';let a=Math.random()*Math.PI*2,r=20+Math.random()*65;s.style.setProperty('--sx',Math.cos(a)*r+'px');s.style.setProperty('--sy',-Math.abs(Math.sin(a)*r)+'px');splashLayer.appendChild(s);setTimeout(()=>s.remove(),750)}}
+function setMode(next){mode=next;$('rainBtn').classList.toggle('active',next==='rain');$('dropsBtn').classList.toggle('active',next==='drops');dropLayer.style.display=next==='drops'?'none':'block';splashLayer.style.display=next==='drops'?'none':'block'}
+$('rainBtn').onclick=()=>setMode('rain');$('dropsBtn').onclick=()=>setMode('drops');
+document.addEventListener('pointerdown',e=>{if(mode==='rain')splash(e.clientX,e.clientY,7)},{passive:true});
+$('copyBtn').onclick=async()=>{try{await navigator.clipboard.writeText('hashem2008issa');show('تم نسخ اسم المستخدم بنجاح');}catch{show('اسم المستخدم: hashem2008issa')}};
+function show(t){let el=$('toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200)}
+$('volume').oninput=e=>audio.volume=Number(e.target.value)/100;audio.volume=.55;
+$('musicBtn').onclick=async()=>{try{if(audio.paused){await audio.play();$('musicBtn').textContent='Ⅱ';show('بدأ تشغيل اللطمية')}else{audio.pause();$('musicBtn').textContent='▶';show('تم إيقاف اللطمية')}}catch{show('ضع ملف hashem.mp3 بجانب index.html ثم اضغط تشغيل')}};
+audio.onended=()=>{$('musicBtn').textContent='▶'};makeDrops();setMode('rain');
+</script>
+</body></html>
