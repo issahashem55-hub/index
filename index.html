@@ -45,9 +45,7 @@
     text-rendering:optimizeLegibility;
   }
 
-  /* ============================================
-     AMBIENT BACKGROUND
-     ============================================ */
+  /* ---------- AMBIENT BACKGROUND ---------- */
   .bg{
     position:fixed; inset:0; z-index:-2;
     background:
@@ -122,7 +120,6 @@
     transform-style:preserve-3d;
     will-change:transform;
   }
-  /* وهج علوي */
   .welcome-card::before{
     content:""; position:absolute;
     top:-55%; left:-30%;
@@ -130,7 +127,6 @@
     background:radial-gradient(ellipse at center, rgba(255,255,255,.25), transparent 60%);
     pointer-events:none;
   }
-  /* انعكاس سفلي */
   .welcome-card::after{
     content:""; position:absolute;
     bottom:-30%; right:-20%;
@@ -166,6 +162,7 @@
     filter:drop-shadow(0 0 26px rgba(255,111,168,.7));
   }
   .welcome-badge .badge-core{
+    position:relative;
     width:100%; height:100%;
     border-radius:30px;
     background:linear-gradient(150deg, #ffffff, #efeaff 55%, #d9d2ff);
@@ -175,9 +172,29 @@
       0 24px 55px -12px rgba(139,123,255,.7),
       inset 0 -8px 22px rgba(139,123,255,.18),
       inset 0 2px 0 rgba(255,255,255,.9);
+    overflow:hidden;
+  }
+  .welcome-badge .badge-core img{
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center;
+    display:block;
+    border-radius:30px;
+    user-select:none;
+    -webkit-user-drag:none;
+    filter:saturate(1.05) contrast(1.02);
+  }
+  .welcome-badge .badge-core::after{
+    content:"";
+    position:absolute; inset:0;
+    border-radius:30px;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,.55),
+      inset 0 -20px 30px -10px rgba(0,0,0,.25);
+    pointer-events:none;
   }
 
-  /* الشارات (Chips) أعلى العنوان */
+  /* الشارات */
   .welcome-tags{
     display:flex; flex-wrap:wrap; gap:8px; justify-content:center;
     margin-bottom:20px;
@@ -201,7 +218,6 @@
   .welcome-tags span:nth-child(2)::before{ background:var(--rose); box-shadow:0 0 10px var(--rose); }
   .welcome-tags span:nth-child(3)::before{ background:var(--gold); box-shadow:0 0 10px var(--gold); }
 
-  /* العنوان الرئيسي */
   .welcome h2{
     margin:0 0 8px;
     font-size:19px;
@@ -211,7 +227,6 @@
     color:var(--ink-dim);
   }
 
-  /* اسم المطوّر — خط عربي عريض غامق مع تدرّج لامع */
   .dev-title{
     margin:14px 0 6px;
     font-family:'Cairo',sans-serif;
@@ -238,7 +253,6 @@
     50%    { background-position:100% 50%; }
   }
 
-  /* الاسم بين قوسين */
   .dev-name{
     margin:0 0 26px;
     font-size:15px;
@@ -263,7 +277,6 @@
     letter-spacing:-.1px;
   }
 
-  /* فاصل أنيق */
   .divider{
     width:60px;
     height:2px;
@@ -273,7 +286,6 @@
     opacity:.7;
   }
 
-  /* زر الدخول */
   .enter-btn{
     width:100%;
     padding:18px 24px;
@@ -313,7 +325,6 @@
   .enter-btn:active{ transform:scale(.97); }
   .enter-btn .ico{ font-size:18px; transform:translateY(-1px); }
 
-  /* نقاط أسفل */
   .welcome-dots{
     display:flex; gap:7px; justify-content:center; margin-top:24px;
   }
@@ -527,13 +538,15 @@
 <div class="noise-orb"></div>
 
 <!-- ============================================
-     شاشة الترحيب (Liquid Glass 3D)
+     شاشة الترحيب
      ============================================ -->
 <div class="welcome" id="welcome">
   <div class="welcome-card" id="welcomeCard">
 
     <div class="welcome-badge">
-      <div class="badge-core">أ</div>
+      <div class="badge-core">
+        <img src="profile.png" alt="أبو الأكبر">
+      </div>
     </div>
 
     <div class="welcome-tags">
@@ -647,6 +660,7 @@
   <footer>صُمم بأسلوب iOS • أبو الأكبر</footer>
 </div>
 
+<!-- الأغنية فقط (بدون صوت ترحيب) -->
 <audio id="audio" src="hashem.mp3" loop></audio>
 
 <script>
@@ -661,44 +675,13 @@
   }
   tick(); setInterval(tick, 1000);
 
-  /* ---------- الصوت الترحيبي ---------- */
-  const WELCOME_TEXT = 'أهلاً وسهلاً بك في صفحة أبو الأكبر الجيسي';
-
-  function speak(text){
-    if (!('speechSynthesis' in window)) return;
-    // اختر صوتاً عربياً إن وُجد
-    const voices = speechSynthesis.getVoices();
-    const arVoice = voices.find(v => v.lang && v.lang.startsWith('ar')) || null;
-
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = arVoice ? arVoice.lang : 'ar-SA';
-    if (arVoice) u.voice = arVoice;
-    u.rate = 0.95;
-    u.pitch = 1.0;
-    u.volume = 1.0;
-    speechSynthesis.cancel();
-    speechSynthesis.speak(u);
-  }
-
-  // تحميل الأصوات مبكراً (بعض المتصفحات تحتاجها قبل الاستخدام)
-  if ('speechSynthesis' in window){
-    speechSynthesis.onvoiceschanged = () => {};
-    speechSynthesis.getVoices();
-  }
-
-  /* ---------- زر الدخول ---------- */
+  /* ---------- زر الدخول (بدون صوت) ---------- */
   const welcome = $('welcome');
   const shell   = $('shell');
 
   $('enterBtn').addEventListener('click', () => {
-    // 1. شغّل الصوت
-    speak(WELCOME_TEXT);
-
-    // 2. أطلق حركات الخروج
     welcome.classList.add('hide');
     shell.classList.add('reveal');
-
-    // 3. احذف شاشة الترحيب من الصفحة بعد نهاية الحركة
     setTimeout(() => { welcome.style.display = 'none'; }, 1100);
   });
 
@@ -717,21 +700,7 @@
     });
   }
 
-  /* ---------- صورة احتياطية إن فشل التحميل ---------- */
-  const avatarImg = document.querySelector('.avatar img');
-  if (avatarImg){
-    avatarImg.addEventListener('error', () => {
-      const div = document.createElement('div');
-      div.style.cssText =
-        'width:100%;height:100%;display:grid;place-items:center;' +
-        'font-size:52px;font-weight:900;color:#0a0c16;' +
-        'background:linear-gradient(150deg,#fff,#e7e4ff 55%,#d9d2ff);';
-      div.textContent = 'أ';
-      avatarImg.replaceWith(div);
-    });
-  }
-
-  /* ---------- الصوت ---------- */
+  /* ---------- صوت الأغنية ---------- */
   const audio = $('audio');
   audio.volume = .65;
   $('volume').oninput = e => audio.volume = e.target.value / 100;
@@ -777,4 +746,4 @@
   }
 </script>
 </body>
-    </html>
+  </html>
