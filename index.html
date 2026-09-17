@@ -147,6 +147,14 @@
     font-size:44px; font-weight:900; color:#0a0c16;
     background:linear-gradient(150deg,#fff, #e7e4ff 55%, #d9d2ff);
     box-shadow:0 10px 30px rgba(0,0,0,.4);
+    overflow:hidden;
+  }
+  .avatar img{
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center;
+    display:block;
+    border-radius:28px;
   }
   .status-dot{
     position:absolute; bottom:-2px; left:-2px;
@@ -292,7 +300,9 @@
   <section class="card hero">
     <div class="avatar-wrap">
       <div class="avatar-ring"></div>
-      <div class="avatar">أ</div>
+      <div class="avatar">
+        <img src="profile.jpg" alt="أبو الأكبر">
+      </div>
       <div class="status-dot" title="متصل الآن"></div>
     </div>
 
